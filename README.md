@@ -50,6 +50,8 @@ This component utilizes **[@ldn0x7dc/react-native-view-pager](https://github.com
 * **onSingleTapConfirmed**: Called after user single taped( not a double tap)
 * **onGalleryStateChanged**: function. (idle) => {}.
 * **loader**: React component that will be displayed before each image has been loaded. For instance, you could use `ActivityIndicator`.
+* **onSlideUp**: function, it's performing when user make swipe gesture on image up (it can be helpful for closing view).
+* **onSlideDown**: function, it's performing when user make swipe gesture on image down (it can be helpful for closing view).
 
 
 

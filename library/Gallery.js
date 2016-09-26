@@ -21,7 +21,10 @@ export default class Gallery extends Component {
     onPageScroll: PropTypes.func,
 
     onSingleTapConfirmed: PropTypes.func,
-    onGalleryStateChanged: PropTypes.func
+    onGalleryStateChanged: PropTypes.func,
+
+    onSlideUp: PropTypes.func,
+    onSlideDown: PropTypes.func,
   };
 
   imageRefs = new Map();
@@ -29,6 +32,7 @@ export default class Gallery extends Component {
   firstMove = true;
   currentPage = 0;
   pageCount = 0;
+  closeOffset = 50;
   gestureResponder = undefined;
 
   constructor(props) {
@@ -89,6 +93,16 @@ export default class Gallery extends Component {
             }
           }
         }
+        if (this.activeResponder === this.imageResponder && this.shouldScrollViewClose(evt, gestureState)) {
+          const dy = gestureState.moveY - gestureState.previousMoveY;
+          if (Math.abs(dy) > this.closeOffset) {
+            if (dy < 0) {
+              this.props.onSlideUp && this.props.onSlideUp();
+            } else {
+              this.props.onSlideDown && this.props.onSlideDown();
+            }
+          }
+        }
         this.activeResponder.onMove(evt, gestureState);
       },
       onResponderRelease: onResponderReleaseOrTerminate.bind(this),
@@ -130,6 +144,18 @@ export default class Gallery extends Component {
 
   componentWillUnmount () {
     this._isMounted = false;
+  }
+
+  shouldScrollViewClose(evt, gestureState) {
+    if (gestureState.numberActiveTouches > 1) {
+      return false;
+    }
+    const viewTransformer = this.getCurrentImageTransformer();
+    const space = viewTransformer.getAvailableTranslateSpace();
+    const dy = gestureState.moveY - gestureState.previousMoveY;
+    const dx = gestureState.moveX - gestureState.previousMoveX;
+
+    return (space.left <= 0 && space.right <= 0 || space.top <= 0 && space.bottom <= 0) && Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > this.closeOffset;
   }
 
   shouldScrollViewPager(evt, gestureState) {
