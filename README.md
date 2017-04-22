@@ -32,9 +32,9 @@ import Gallery from 'react-native-gallery';
       <Gallery
         style={{flex: 1, backgroundColor: 'black'}}
         images={[
-          'http://p10.qhimg.com/t019e9cf51692f735be.jpg',
-          'http://ww2.sinaimg.cn/mw690/714a59a7tw1dxqkkg0cwlj.jpg',
-          'http://www.bz55.com/uploads/allimg/150122/139-150122145421.jpg'
+          {uri: 'http://p10.qhimg.com/t019e9cf51692f735be.jpg'},
+          {uri: 'http://ww2.sinaimg.cn/mw690/714a59a7tw1dxqkkg0cwlj.jpg'},
+          {uri: 'http://www.bz55.com/uploads/allimg/150122/139-150122145421.jpg'}
         ]}
       />
     );
