@@ -12,7 +12,7 @@ export default class Gallery extends Component {
 
   static propTypes = {
     ...View.propTypes,
-    imagesSources: PropTypes.array,
+    images: PropTypes.array,
 
     initialPage: PropTypes.number,
     pageMargin: PropTypes.number,
@@ -215,11 +215,11 @@ export default class Gallery extends Component {
   render() {
     let gestureResponder = this.gestureResponder;
 
-    let imagesSources = this.props.imagesSources;
-    if (!imagesSources) {
-      imagesSources = [];
+    let images= this.props.images;
+    if (!images) {
+      images = [];
     }
-    this.pageCount = imagesSources.length;
+    this.pageCount = images.length;
 
     if (this.pageCount <= 0) {
       gestureResponder = {};
@@ -231,7 +231,7 @@ export default class Gallery extends Component {
         ref='galleryViewPager'
         scrollEnabled={false}
         renderPage={this.renderPage.bind(this)}
-        pageDataArray={imagesSources}
+        pageDataArray={images}
         {...gestureResponder}
         onPageSelected={this.onPageSelected.bind(this)}
         onPageScrollStateChanged={this.onPageScrollStateChanged.bind(this)}
