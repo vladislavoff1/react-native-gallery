@@ -270,6 +270,11 @@ export default class Gallery extends Component {
 
   renderPage(pageData, pageId, layout) {
     const { onViewTransformed, onTransformGestureReleased, loader, ...other } = this.props;
+    let shouldLoad = pageId == this.currentPage ||
+      pageId == this.currentPage - 1 ||
+      pageId == this.currentPage + 1;
+
+
     const loaded = this.state.imagesLoaded[pageId] && this.state.imagesLoaded[pageId] === true;
     const loadingView = !loaded && loader ? loader : false;
 
@@ -292,7 +297,7 @@ export default class Gallery extends Component {
         }).bind(this)}
         key={'innerImage#' + pageId}
         style={{width: layout.width, height: layout.height}}
-        source={{uri: pageData.uri}}
+        source={shouldLoad ? {uri: pageData.uri} : null}
         pixels={pixels}>
           { loadingView }
         </Image>
