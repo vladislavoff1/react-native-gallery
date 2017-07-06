@@ -209,7 +209,7 @@ export default class Gallery extends Component {
   }
 
   getViewPagerInstance() {
-    return this.refs['galleryViewPager'];
+    return this.galleryViewPager;
   }
 
   render() {
@@ -228,7 +228,7 @@ export default class Gallery extends Component {
     return (
       <ViewPager
         {...this.props}
-        ref='galleryViewPager'
+        ref={c => {this.galleryViewPager = c}}
         scrollEnabled={false}
         renderPage={this.renderPage.bind(this)}
         pageDataArray={images}
