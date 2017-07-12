@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 
 import Image from 'react-native-transformable-image';
-import ViewPager from '@ldn0x7dc/react-native-view-pager';
+import {FlatListViewPager} from '@guangmingzizai/react-native-view-pager';
 import {createResponder} from 'react-native-gesture-responder';
 
 
@@ -226,7 +226,7 @@ export default class Gallery extends Component {
     }
 
     return (
-      <ViewPager
+      <FlatListViewPager
         {...this.props}
         ref={c => {this.galleryViewPager = c}}
         scrollEnabled={false}
@@ -293,7 +293,7 @@ export default class Gallery extends Component {
            onTransformGestureReleased && onTransformGestureReleased(transform, pageId);
         }).bind(this)}
         ref={((ref) => {
-           this.imageRefs.set(pageId, ref);
+            this.imageRefs.set(pageId + '', ref);
         }).bind(this)}
         key={'innerImage#' + pageId}
         style={{width: layout.width, height: layout.height}}
