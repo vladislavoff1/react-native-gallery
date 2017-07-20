@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/ldn0x7dc/react-native-gallery#readme",
   "dependencies": {
-    "@guangmingzizai/react-native-view-pager": "https://github.com/guangmingzizai/react-native-view-pager.git",
+    "@guangmingzizai/react-native-view-pager": "https://github.com/JodiWarren/react-native-view-pager.git",
     "react-native-gesture-responder": "0.1.1",
     "react-native-transformable-image": "0.0.18"
   }
