@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  View
+  View,
+  Text,
+  ActivityIndicator
 } from 'react-native';
 
 import Image from 'react-native-transformable-image';
@@ -268,7 +270,7 @@ export default class Gallery extends Component {
     });
   };
 
-  renderPage(pageData, pageId, layout) {
+  renderPage(pageData, pageId, layout, visible) {
     const { onViewTransformed, onTransformGestureReleased, loader, ...other } = this.props;
     let shouldLoad = pageId == this.currentPage ||
       pageId == this.currentPage - 1 ||
@@ -283,6 +285,13 @@ export default class Gallery extends Component {
         : null;
 
     return (
+        <View style={{width: layout.width, height: layout.height, flex: 1}}>
+            {(!visible)
+                ? (
+                    <ActivityIndicator style={{position: 'absolute', top: layout.height/2, left: layout.width/2}} />
+                )
+                : null
+            }
       <Image
         {...other}
         onLoad={() => this.setImageLoaded(pageId)}
@@ -297,10 +306,9 @@ export default class Gallery extends Component {
         }).bind(this)}
         key={'innerImage#' + pageId}
         style={{width: layout.width, height: layout.height}}
-        source={shouldLoad ? {uri: pageData.uri} : null}
-        pixels={pixels}>
-          { loadingView }
-        </Image>
+        source={(shouldLoad && visible) ? {uri: pageData.uri} : null}
+        pixels={pixels} />
+      </View>
     );
   }
 
